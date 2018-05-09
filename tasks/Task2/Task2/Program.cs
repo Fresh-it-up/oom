@@ -18,19 +18,27 @@ namespace Task2
             this.PriceWithUst = 0.0;
             this.Ust = 0.0;
         }
-        //public Properties
-        public string Genre;
-        public string Name;
-        public string Publisher;
 
-        //private Field
+        //private Fields
+        private string m_Genre;
+        private string m_Name;
+        private string m_publisher;
         private double m_Price;
         private double m_Ust;
         private double m_PriceWithUst;
 
+        //public Properties
         public double Price { get => m_Price; set => m_Price = value; }
         public double Ust { get => m_Ust; set => m_Ust = value; }
         public double PriceWithUst { get => m_PriceWithUst; set => m_PriceWithUst = value; }
+        public string Genre { get => m_Genre; set => m_Genre = value; }
+        public string Name
+        {
+            get => m_Name;
+            set => m_Name = value;
+
+        }
+        public string Publisher { get => m_publisher; set => m_publisher = value; }
 
         //Methoden
         public void calculatePrice()
