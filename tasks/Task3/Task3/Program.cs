@@ -6,57 +6,160 @@ using System.Threading.Tasks;
 
 namespace Task3
 {
-    public class Games
+    interface IGames
     {
+        string getName();
+        string getGenre();
+        string getPublisher();
+        string getPlattform();
+        decimal getPrice();
+        decimal getUst();
+        void CalculatePrice();
+    }
+
+    public class PS4 : IGames
+    {
+
+        //private Fields
+        private string m_Genre;
+        private string m_Name;
+        private string m_publisher;
+        private string m_plattform;
+        private decimal m_Price;
+        private decimal m_Ust;
+        
+        //public Properties
+        public decimal Price { get => m_Price; set => m_Price = value; }
+        public decimal Ust { get => m_Ust; set => m_Ust = value; }
+        public string Genre { get => m_Genre; set => m_Genre = value; }
+        public string Name { get => m_Name; set => m_Name = value; }
+        public string Publisher { get => m_publisher; set => m_publisher = value; }
+        public string Plattform { get => m_plattform; set => m_plattform = value; }
+        
         //Konstruktor
-        public Games(string Name, string Genre, string Publisher, double Price)
+        public PS4(string Name, string Genre, string Publisher, string Plattform, decimal Price)
         {
             this.Name = Name;
             this.Genre = Genre;
             this.Publisher = Publisher;
+            this.Plattform = Plattform;
             this.Price = Price;
-            this.PriceWithUst = 0.0;
-            this.Ust = 0.0;
         }
+        //Methoden
+        public void CalculatePrice()
+        {
+            Price = Price + (Ust = Price * (decimal)0.10);
+        }
+
+        public string getName() { return this.Name; }
+        public string getGenre() { return this.Genre; }
+        public string getPublisher() { return this.Publisher; }
+        public string getPlattform() { return this.Plattform; }
+        public decimal getPrice() { return this.Price; }
+        public decimal getUst() { return this.Ust; }
+    }
+
+    public class XBox : IGames
+    {
+
+        //private Fields
+        private string m_Genre;
+        private string m_Name;
+        private string m_publisher;
+        private string m_plattform;
+        private decimal m_Price;
+        private decimal m_Ust;
+        
         //public Properties
-        public string Genre;
-        public string Name;
-        public string Publisher;
+        public decimal Price { get => m_Price; set => m_Price = value; }
+        public decimal Ust { get => m_Ust; set => m_Ust = value; }
+        public string Genre { get => m_Genre; set => m_Genre = value; }
+        public string Name { get => m_Name; set => m_Name = value; }
+        public string Publisher { get => m_publisher; set => m_publisher = value; }
+        public string Plattform { get => m_plattform; set => m_plattform = value; }
 
-        //private Field
-        private double m_Price;
-        private double m_Ust;
-        private double m_PriceWithUst;
+        //Konstruktor
+        public XBox(string Name, string Genre, string Publisher, string Plattform, decimal Price)
+        {
+            this.Name = Name;
+            this.Genre = Genre;
+            this.Publisher = Publisher;
+            this.Plattform = Plattform;
+            this.Price = Price;
+        }
+        //Methoden
+        public void CalculatePrice()
+        {
+            Price = Price + (Ust = Price * (decimal)0.15);
+        }
+        public string getName() { return this.Name; }
+        public string getGenre() { return this.Genre; }
+        public string getPublisher() { return this.Publisher; }
+        public string getPlattform() { return this.Plattform; }
+        public decimal getPrice() { return this.Price; }
+        public decimal getUst() { return this.Ust; }
+    }
 
-        public double Price { get => m_Price; set => m_Price = value; }
-        public double Ust { get => m_Ust; set => m_Ust = value; }
-        public double PriceWithUst { get => m_PriceWithUst; set => m_PriceWithUst = value; }
+    public class PC:IGames
+    {
+        //Konstruktor
+        public PC(string Name, string Genre, string Publisher, string Plattform, decimal Price)
+        {
+            this.Name = Name;
+            this.Genre = Genre;
+            this.Publisher = Publisher;
+            this.Plattform = Plattform;
+            this.Price = Price;
+        }
+
+        //private Fields
+        private string m_Genre;
+        private string m_Name;
+        private string m_publisher;
+        private string m_plattform;
+        private decimal m_Price;
+        private decimal m_Ust;
+        
+        //public Properties
+        public decimal Price { get => m_Price; set => m_Price = value; }
+        public decimal Ust { get => m_Ust; set => m_Ust = value; }
+        public string Genre { get => m_Genre; set => m_Genre = value; }
+        public string Name { get => m_Name; set => m_Name = value; }
+        public string Publisher { get => m_publisher; set => m_publisher = value; }
+        public string Plattform { get => m_plattform; set => m_plattform = value; }
 
         //Methoden
-        public void calculatePrice()
+        public void CalculatePrice()
         {
-            PriceWithUst = Price + (Ust = Price * 0.20);
+            Price = Price + (Ust = Price * (decimal)0.20);
         }
+        public string getName() { return this.Name; }
+        public string getGenre() { return this.Genre; }
+        public string getPublisher() { return this.Publisher; }
+        public string getPlattform() { return this.Plattform; }
+        public decimal getPrice() { return this.Price; }
+        public decimal getUst() { return this.Ust; }
 
         static void Main(string[] args)
         {
             //Erzeugt eine Liste für Spiele
-            List<Games> Spiele = new List<Games>();
+            List<IGames> Spiele = new List<IGames>();
             //Spiele werden in diese Liste gespeichert
-            Spiele.Add(new Games("Age of Empires", "Strategy", "Microsoft Games", 23.10));
-            Spiele.Add(new Games("Need for Speed", "Racing", "Electronic Arts", 10.00));
-            Spiele.Add(new Games("Rainbow Six: Siege", "First Person Shooter", "Ubisoft", 30.20));
+            Spiele.Add(new PC("Age of Empires", "Strategy", "Microsoft Games", "PC", 30));
+            Spiele.Add(new PS4("Need for Speed", "Racing", "Electronic Arts", "PS4", 30));
+            Spiele.Add(new XBox("Rainbow Six: Siege", "First Person Shooter", "XBox", "Ubisoft", 30));
 
             //Schleife zur Ausgabe aller zuvor gespeicherten Spiele und veränderung der Preise
             foreach (var spiel in Spiele)
             {
-                Console.WriteLine("Name:" + spiel.Name + "\t" + "Genre: " + spiel.Genre + "\t" + "Publisher: " + spiel.Publisher + "\t" + "Preis: " + spiel.Price);
+                Console.WriteLine("Plattform: " + spiel.getPlattform());
+                Console.WriteLine("Name:" + spiel.getName() + "\t" + "Genre: " + spiel.getGenre() + "\t" + "Publisher: " + spiel.getPublisher() + "\t" + "Preis: " + spiel.getPrice());
                 // Ausgabe bevor Preise veraendert wurden
-                Console.WriteLine("Preis vor Berchnung: " + spiel.PriceWithUst + " davon 20% Ust: " + spiel.Ust);
+                Console.WriteLine("Preis vor Berchnung: " + spiel.getPrice());
                 // Preise veraendern
-                spiel.calculatePrice();
+                spiel.CalculatePrice();
                 // Ausgabe nach Preiseveraenderung
-                Console.WriteLine("Neuer Preis nach Berechnung: " + spiel.PriceWithUst + " davon 20% Ust: " + spiel.Ust);
+                Console.WriteLine("Neuer Preis nach Berechnung: " + spiel.getPrice() + "\n\n");
             }
 
 
