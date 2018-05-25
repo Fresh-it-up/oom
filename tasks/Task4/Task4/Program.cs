@@ -41,10 +41,15 @@ namespace Task4
         //Konstruktor
         public PS4(string Name, string Genre, string Publisher, string Plattform, decimal Price)
         {
+            if (Name == "" || Name == null) throw new ArgumentException("Name must contain value.", nameof(Name));
             this.Name = Name;
+            if (Genre == "" || Genre == null) throw new ArgumentException("Genre must contain value.", nameof(Genre));
             this.Genre = Genre;
+            if (Publisher == "" || Publisher == null) throw new ArgumentException("Publisher must contain value.", nameof(Publisher));
             this.Publisher = Publisher;
+            if (Plattform == "" || Plattform == null) throw new ArgumentException("Plattform must contain value.", nameof(Plattform));
             this.Plattform = Plattform;
+            if (Price < 0) throw new ArgumentException("Price must not be negative.", nameof(Price));
             this.Price = Price;
         }
         //Methoden
@@ -84,10 +89,15 @@ namespace Task4
         //Konstruktor
         public XBox(string Name, string Genre, string Publisher, string Plattform, decimal Price)
         {
+            if (Name == "" || Name == null) throw new ArgumentException("Name must contain value.", nameof(Name));
             this.Name = Name;
+            if (Genre == "" || Genre == null) throw new ArgumentException("Genre must contain value.", nameof(Genre));
             this.Genre = Genre;
+            if (Publisher == "" || Publisher == null) throw new ArgumentException("Publisher must contain value.", nameof(Publisher));
             this.Publisher = Publisher;
+            if (Plattform == "" || Plattform == null) throw new ArgumentException("Plattform must contain value.", nameof(Plattform));
             this.Plattform = Plattform;
+            if (Price < 0) throw new ArgumentException("Price must not be negative.", nameof(Price));
             this.Price = Price;
         }
         //Methoden
@@ -108,10 +118,15 @@ namespace Task4
         //Konstruktor
         public PC(string Name, string Genre, string Publisher, string Plattform, decimal Price)
         {
+            if (Name == "" || Name == null) throw new ArgumentException("Name must contain value.", nameof(Name));
             this.Name = Name;
+            if (Genre == "" || Genre == null) throw new ArgumentException("Genre must contain value.", nameof(Genre));
             this.Genre = Genre;
+            if (Publisher == "" || Publisher == null) throw new ArgumentException("Publisher must contain value.", nameof(Publisher));
             this.Publisher = Publisher;
+            if (Plattform == "" || Plattform == null) throw new ArgumentException("Plattform must contain value.", nameof(Plattform));
             this.Plattform = Plattform;
+            if (Price < 0) throw new ArgumentException("Price must not be negative.", nameof(Price));
             this.Price = Price;
         }
 
