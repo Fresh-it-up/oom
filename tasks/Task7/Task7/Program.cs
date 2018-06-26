@@ -11,6 +11,32 @@ using static System.Console;
 
 namespace Task7
 {
+    public class asy
+    {
+        public static Task<bool> IsPrime(int x, CancellationToken ct)
+        {
+            return Task.Run(() =>
+            {
+                for (var i = 2; i < x - 1; i++)
+                {
+                    ct.ThrowIfCancellationRequested();
+                    if (x % i == 0) return false;
+                }
+                return true;
+            }, ct);
+        }
+
+        public static async Task ComputePrimes(CancellationToken ct)
+        {
+            for (var i = 100000000; i < int.MaxValue; i++)
+            {
+                ct.ThrowIfCancellationRequested();
+                if (await IsPrime(i, ct)) WriteLine($"[P] prime number: {i}");
+            }
+        }
+
+    }
+
     interface IGames
     {
         string getName();
@@ -114,7 +140,7 @@ namespace Task7
         public decimal getPrice() { return this.Price; }
         public decimal getUst() { return this.Ust; }
     }
-
+    
     public class PC : IGames
     {
         //Konstruktor
@@ -280,10 +306,35 @@ namespace Task7
                 Console.WriteLine("Ende von Task 3....\n");
             });
 
-            Console.WriteLine("Enter zum Beenden..........");
 
+            Task task5 = task1.ContinueWith(anttask =>
+            {
+                IEnumerable<IGames> gameQuery =
+                from gU in Spiele
+                where gU.getPrice() > 40 && gU.getPrice() < 50
+                select gU;
+
+                foreach (PC g in gameQuery)
+                {
+                    Console.WriteLine("\t{0,8:c}", g.getPrice());
+                }
+            });
+
+            
+
+            Console.WriteLine("Enter zum Beenden..........");
+            var cts = new CancellationTokenSource();
+            var primeTask = asy.ComputePrimes(cts.Token);
             ReadLine();
+
+            cts.Cancel();
+            WriteLine("canceled ComputePrimes");
+            
         }
 
     }
+
+
+
+
 }
